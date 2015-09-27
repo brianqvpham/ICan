@@ -1,12 +1,12 @@
 package com.ican.ican;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         View fab = findViewById(R.id.newRecyclable);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +41,20 @@ public class MainActivity extends AppCompatActivity {
                 });
 
                 dialog.show();
+            }
+        });
+
+        View share = findViewById(R.id.shareButton);
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent share = new Intent(android.content.Intent.ACTION_SEND);
+                share.setType("text/plain");
+
+                share.putExtra(Intent.EXTRA_SUBJECT, "iCan do it!");
+                share.putExtra(Intent.EXTRA_TEXT, "I helped the earth by doing a thing!");
+
+                startActivity(Intent.createChooser(share, "Share status!"));
             }
         });
     }
