@@ -23,10 +23,10 @@ public enum Recyclable {
     }
 
     public String getFacts() {
-        int laptop = (int) Math.floor(nrg * LAPTOP_RATIO * 60);
-        int hairAndAir = (int) Math.floor(nrg * HAIR_AND_AIR_RATIO * 60);
-        return "By recycling, you could charge your laptop for " + laptop + " minutes or " +
+        int laptop = (int) Math.floor(nrg * LAPTOP_RATIO * 60 * alltime);
+        int hairAndAir = (int) Math.floor(nrg * HAIR_AND_AIR_RATIO * 60 * alltime);
+        return "By recycling, you have conserved enough energy to charge your laptop for " + laptop + " minutes or " +
                 "use your hairdryer or air conditioner for "
-                + hairAndAir + " minutes with every item you recycle!";
+                + hairAndAir + " minutes!";
     }
 }
