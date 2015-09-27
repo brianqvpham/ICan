@@ -33,13 +33,14 @@ public class CardViewDataAdapter extends RecyclerView.Adapter<CardViewDataAdapte
             @Override
             public void onClick(View v) {
                 final Dialog dialog = new Dialog(MainActivity.context);
-                dialog.setTitle("New Recyclable");
+                dialog.setTitle(Recyclable.values()[i].name);
                 dialog.setContentView(R.layout.infodialog);
                 ((TextView) dialog.findViewById(R.id.numItemsToday)).setText("" + Recyclable.values()[i].daily);
                 ((TextView) dialog.findViewById(R.id.numItemsTotal)).setText("" + Recyclable.values()[i].alltime);
                 ((TextView) dialog.findViewById(R.id.energy)).setText("" + Recyclable.values()[i].nrg + "kWh");
                 ((TextView) dialog.findViewById(R.id.energyToday)).setText("" + Recyclable.values()[i].daily * Recyclable.values()[i].nrg + "kWh");
                 ((TextView) dialog.findViewById(R.id.energyTotal)).setText("" + Recyclable.values()[i].alltime * Recyclable.values()[i].nrg + "kWh");
+                ((TextView) dialog.findViewById(R.id.facts)).setText("" + Recyclable.values()[i].getFacts());
                 dialog.show();
             }
         });
