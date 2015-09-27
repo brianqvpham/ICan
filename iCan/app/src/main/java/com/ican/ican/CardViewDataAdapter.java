@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class CardViewDataAdapter extends RecyclerView.Adapter<CardViewDataAdapter.ViewHolder> {
 
@@ -32,8 +34,14 @@ public class CardViewDataAdapter extends RecyclerView.Adapter<CardViewDataAdapte
                 ((TextView) dialog.findViewById(R.id.numItemsToday)).setText("" + Recyclable.values()[i].daily);
                 ((TextView) dialog.findViewById(R.id.numItemsTotal)).setText("" + Recyclable.values()[i].alltime);
                 ((TextView) dialog.findViewById(R.id.energy)).setText("" + Recyclable.values()[i].nrg + "kWh");
-                ((TextView) dialog.findViewById(R.id.energyToday)).setText("" + Recyclable.values()[i].daily * Recyclable.values()[i].nrg + "kWh");
-                ((TextView) dialog.findViewById(R.id.energyTotal)).setText("" + Recyclable.values()[i].alltime * Recyclable.values()[i].nrg + "kWh");
+                double today = Recyclable.values()[i].daily * Recyclable.values()[i].nrg;
+                BigDecimal bd = new BigDecimal(today);
+                bd = bd.setScale(2, RoundingMode.HALF_UP);
+                ((TextView) dialog.findViewById(R.id.energyToday)).setText("" + bd + "kWh");
+                double total = Recyclable.values()[i].alltime * Recyclable.values()[i].nrg;
+                bd = new BigDecimal(total);
+                bd = bd.setScale(2, RoundingMode.HALF_UP);
+                ((TextView) dialog.findViewById(R.id.energyTotal)).setText("" + bd + "kWh");
                 ((TextView) dialog.findViewById(R.id.facts)).setText("" + Recyclable.values()[i].getFacts());
                 dialog.show();
             }
