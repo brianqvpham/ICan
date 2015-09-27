@@ -46,7 +46,6 @@ public class MainActivityFragment extends Fragment {
                 Recyclable.values()[index].alltime = numItems;
             }
         } catch(IOException | JSONException e) {
-            System.out.println("!");
         }
         return inflater.inflate(R.layout.fragment_main, container, false);
     }

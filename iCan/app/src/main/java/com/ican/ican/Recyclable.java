@@ -8,7 +8,7 @@ public enum Recyclable {
     SHEET_OF_PAPER("Sheets of Paper", .05),
     PLASTIC_GROCERY_BAG("Plastic Grocery Bags", .02);
 
-    private static final int LAPTOP_RATIO = 20;
+    static final int LAPTOP_RATIO = 20;
     private static final int HAIR_AND_AIR_RATIO = 1;
     public final String name;
     public final double nrg;

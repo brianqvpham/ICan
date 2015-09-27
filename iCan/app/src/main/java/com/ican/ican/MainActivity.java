@@ -120,8 +120,17 @@ public class MainActivity extends AppCompatActivity {
                 Intent share = new Intent(android.content.Intent.ACTION_SEND);
                 share.setType("text/plain");
 
+                int total = 0;
+                for (int i = 0; i < Recyclable.values().length; i++) {
+                    total += Recyclable.values()[i].alltime;
+                }
+                double hours = 0;
+                for (int i = 0; i < Recyclable.values().length; i++) {
+                    Recyclable recyclable = Recyclable.values()[i];
+                    hours += Math.floor(recyclable.nrg * Recyclable.LAPTOP_RATIO * recyclable.alltime);
+                }
                 share.putExtra(Intent.EXTRA_SUBJECT, "iCan do it!");
-                share.putExtra(Intent.EXTRA_TEXT, "I helped the earth by doing a thing!");
+                share.putExtra(Intent.EXTRA_TEXT, "I recycled " + total + " items! In total I've conserved enough energy to charge a laptop for " + (int) hours + " hours!!!!! :)");
 
                 startActivity(Intent.createChooser(share, "Share status!"));
             }
