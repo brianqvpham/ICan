@@ -6,4 +6,6 @@
     <string name="alltime"> All Time</string>
     <string name="share">Share My Stats!</string>
     <string name="numItems">Number of items:</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>

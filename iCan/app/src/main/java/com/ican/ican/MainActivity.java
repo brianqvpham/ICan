@@ -4,11 +4,20 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Spinner;
+import android.widget.Switch;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static boolean dataRange = false;
+
+    public MainActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +37,11 @@ public class MainActivity extends AppCompatActivity {
                 confirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        int index = ((Spinner) dialog.findViewById(R.id.category)).getCount();
+                        Recyclable recyclable = Recyclable.values()[index];
+                        recyclable.daily++;
+                        recyclable.alltime++;
+                        //((RecyclerView) findViewById(R.id.stats)).getChildAt(index);
                     }
                 });
 
@@ -55,6 +68,21 @@ public class MainActivity extends AppCompatActivity {
                 share.putExtra(Intent.EXTRA_TEXT, "I helped the earth by doing a thing!");
 
                 startActivity(Intent.createChooser(share, "Share status!"));
+            }
+        });
+
+        RecyclerView stats = (RecyclerView) findViewById(R.id.stats);
+        RecyclerView.LayoutManager statsLayoutManager = new LinearLayoutManager(this);
+        stats.setLayoutManager(statsLayoutManager);
+
+        RecyclerView.Adapter statsAdapter = new CardViewDataAdapter();
+        stats.setAdapter(statsAdapter);
+
+        final Switch range = (Switch) findViewById(R.id.dataRange);
+        range.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataRange = range.isChecked();
             }
         });
     }

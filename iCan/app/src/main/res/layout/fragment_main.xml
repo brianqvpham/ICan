@@ -64,17 +64,6 @@
         android:layout_alignBottom="@+id/dataRange"
         android:layout_marginRight="8dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/stats"
-        android:layout_below="@+id/dailyText"
-        android:layout_above="@+id/shareButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/newRecyclable"
         android:layout_width="wrap_content"
@@ -87,5 +76,14 @@
         android:layout_alignParentEnd="true"
         android:layout_marginBottom="16dp"
         android:layout_marginRight="8dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/stats"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_above="@+id/view"
+        android:layout_below="@+id/dataRange" />
 
 </RelativeLayout>
