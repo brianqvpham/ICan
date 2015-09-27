@@ -51,7 +51,11 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         int index = ((Spinner) dialog.findViewById(R.id.category)).getSelectedItemPosition();
                         Recyclable recyclable = Recyclable.values()[index];
-                        int numItems = Integer.parseInt(((EditText) dialog.findViewById(R.id.numItems)).getText().toString());
+                        int numItems = 0;
+                        try {
+                            numItems = Integer.parseInt(((EditText) dialog.findViewById(R.id.numItems)).getText().toString());
+                        } catch(NumberFormatException ignored) {
+                        }
                         recyclable.daily += numItems;
                         recyclable.alltime += numItems;
                         ((TextView) ((RecyclerView) findViewById(R.id.stats)).getChildAt(index).findViewById(R.id.count)).setText("" + (MainActivity.dataRange ? Recyclable.values()[index].alltime : Recyclable.values()[index].daily));
