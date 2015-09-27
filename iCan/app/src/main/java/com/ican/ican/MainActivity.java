@@ -139,6 +139,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dataRange = range.isChecked();
+                for(int i = 0; i < ((RecyclerView) findViewById(R.id.stats)).getChildCount(); i++) {
+                    ((TextView) ((RecyclerView) findViewById(R.id.stats)).getChildAt(i).findViewById(R.id.count)).setText("" + (dataRange ? Recyclable.values()[i].alltime : Recyclable.values()[i].daily));
+                }
             }
         });
     }
