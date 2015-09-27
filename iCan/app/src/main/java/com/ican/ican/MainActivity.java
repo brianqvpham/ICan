@@ -9,8 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,15 +36,23 @@ public class MainActivity extends AppCompatActivity {
                 dialog.setContentView(R.layout.maindialog);
                 dialog.setCancelable(true);
 
+                Spinner spinner = (Spinner) dialog.findViewById(R.id.category);
+                // Create an ArrayAdapter using the string array and a default spinner layout
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.this,
+                        R.array.Recyclables, android.R.layout.simple_spinner_item);
+                spinner.setAdapter(adapter);
+
                 View confirm = dialog.findViewById(R.id.confirm);
                 confirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        int index = ((Spinner) dialog.findViewById(R.id.category)).getCount();
+                        int index = ((Spinner) dialog.findViewById(R.id.category)).getSelectedItemPosition();
                         Recyclable recyclable = Recyclable.values()[index];
-                        recyclable.daily++;
-                        recyclable.alltime++;
-                        //((RecyclerView) findViewById(R.id.stats)).getChildAt(index);
+                        int numItems = Integer.parseInt(((EditText) dialog.findViewById(R.id.numItems)).getText().toString());
+                        recyclable.daily += numItems;
+                        recyclable.alltime += numItems;
+                        ((TextView) ((RecyclerView) findViewById(R.id.stats)).getChildAt(index).findViewById(R.id.count)).setText("" + (MainActivity.dataRange ? Recyclable.values()[index].alltime : Recyclable.values()[index].daily));
+                        dialog.cancel();
                     }
                 });
 

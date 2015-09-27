@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Recyclables">
+        <item>Aluminum Cans</item>
+        <item>Glass Bottles</item>
+        <item>Plastic Bottles</item>
+        <item>Sheets of Paper</item>
+        <item>Plastic Grocery Bags</item>
+    </string-array>
+</resources>
