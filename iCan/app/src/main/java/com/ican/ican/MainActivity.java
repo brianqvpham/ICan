@@ -14,6 +14,14 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+
 public class MainActivity extends AppCompatActivity {
 
     public static boolean dataRange = false;
@@ -21,6 +29,36 @@ public class MainActivity extends AppCompatActivity {
 
     public MainActivity() {
         context = this;
+    }
+
+    public static void save() {
+        // TODO multithread???
+        try {
+            FileOutputStream fos = context.openFileOutput("data.json", Context.MODE_PRIVATE);
+            JSONObject object = new JSONObject();
+            object.put("time", new Date().getTime());
+            JSONArray daily = new JSONArray();
+            for (int i = 0; i < Recyclable.values().length; i++) {
+                JSONObject dailyObject = new JSONObject();
+                dailyObject.put("numItems", Recyclable.values()[i].daily);
+                dailyObject.put("index", i);
+                daily.put(dailyObject);
+            }
+            JSONArray all = new JSONArray();
+            for (int i = 0; i < Recyclable.values().length; i++) {
+                JSONObject allObject = new JSONObject();
+                allObject.put("numItems", Recyclable.values()[i].alltime);
+                allObject.put("index", i);
+                all.put(allObject);
+            }
+            object.put("daily", daily);
+            object.put("all", all);
+            fos.write(object.toString().getBytes());
+            fos.close();
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -58,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
                         recyclable.alltime += numItems;
                         ((TextView) ((RecyclerView) findViewById(R.id.stats)).getChildAt(index).findViewById(R.id.count)).setText("" + (MainActivity.dataRange ? Recyclable.values()[index].alltime : Recyclable.values()[index].daily));
                         dialog.cancel();
+
+                        save();
                     }
                 });
 
