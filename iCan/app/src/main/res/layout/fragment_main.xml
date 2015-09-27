@@ -6,25 +6,70 @@
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivityFragment"
     android:background="#008348">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="New Button"
+    <android.support.v7.widget.CardView
         android:id="@+id/shareButton"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="#00975d"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="6dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="#00ffffff"
-        android:enabled="true"
-        android:clickable="true" />
+        android:layout_centerHorizontal="true">
+
+        <TextView android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8.5dp"
+            android:paddingBottom="8.5dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:text="@string/share" />
+
+    </android.support.v7.widget.CardView>
 
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/dataRange"
         android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/alltimeText"
+        android:layout_toStartOf="@+id/alltimeText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/daily"
+        android:id="@+id/dailyText"
+        android:layout_toLeftOf="@+id/dataRange"
+        android:layout_toStartOf="@+id/dataRange"
+        android:layout_alignTop="@+id/dataRange"
+        android:layout_alignBottom="@+id/dataRange"
+        android:gravity="fill_vertical" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/alltime"
+        android:id="@+id/alltimeText"
+        android:gravity="fill_vertical"
+        android:layout_alignTop="@+id/dataRange"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textOn="@string/daily"
-        android:textOff="@string/alltime"/>
+        android:layout_alignBottom="@+id/dataRange" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/stats"
+        android:layout_below="@+id/dailyText"
+        android:layout_above="@+id/shareButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/alltimeText"
+        android:layout_alignEnd="@+id/alltimeText" />
 
 </RelativeLayout>
