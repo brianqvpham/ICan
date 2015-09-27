@@ -3,12 +3,10 @@ package com.ican.ican;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -54,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         int numItems = 0;
                         try {
                             numItems = Integer.parseInt(((EditText) dialog.findViewById(R.id.numItems)).getText().toString());
-                        } catch(NumberFormatException ignored) {
+                        } catch (NumberFormatException ignored) {
                         }
                         recyclable.daily += numItems;
                         recyclable.alltime += numItems;
@@ -103,28 +101,5 @@ public class MainActivity extends AppCompatActivity {
                 dataRange = range.isChecked();
             }
         });
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

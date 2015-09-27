@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">iCan</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="daily">Daily </string>
     <string name="alltime"> All Time</string>
     <string name="share">Share My Stats!</string>
