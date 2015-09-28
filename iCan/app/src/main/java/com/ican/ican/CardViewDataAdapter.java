@@ -23,8 +23,8 @@ public class CardViewDataAdapter extends RecyclerView.Adapter<CardViewDataAdapte
     public void onBindViewHolder(ViewHolder viewHolder, final int i) {
         // - get data from your itemsData at this position
         // - replace the contents of the view with that itemsData
-        viewHolder.name.setText(Recyclable.values()[i].name);
-        viewHolder.count.setText("" + (MainActivity.dataRange ? Recyclable.values()[i].alltime : Recyclable.values()[i].daily));
+        viewHolder.name.setText(" " + Recyclable.values()[i].name);
+        viewHolder.count.setText("" + (MainActivity.dataRange ? Recyclable.values()[i].alltime : Recyclable.values()[i].daily) + " ");
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
