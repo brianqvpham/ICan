@@ -31,17 +31,11 @@ public class CardViewDataAdapter extends RecyclerView.Adapter<CardViewDataAdapte
                 final Dialog dialog = new Dialog(MainActivity.context);
                 dialog.setTitle(Recyclable.values()[i].name);
                 dialog.setContentView(R.layout.infodialog);
-                ((TextView) dialog.findViewById(R.id.numItemsToday)).setText("" + Recyclable.values()[i].daily);
-                ((TextView) dialog.findViewById(R.id.numItemsTotal)).setText("" + Recyclable.values()[i].alltime);
-                ((TextView) dialog.findViewById(R.id.energy)).setText("" + Recyclable.values()[i].nrg + "kWh");
-                double today = Recyclable.values()[i].daily * Recyclable.values()[i].nrg;
-                BigDecimal bd = new BigDecimal(today);
+                ((TextView) dialog.findViewById(R.id.intro)).setText("By recycling " + (MainActivity.dataRange ? Recyclable.values()[i].alltime : Recyclable.values()[i].daily) + " items you have conserved an incredible:");
+                double total = (MainActivity.dataRange ? Recyclable.values()[i].alltime : Recyclable.values()[i].daily) * Recyclable.values()[i].nrg;
+                BigDecimal bd = new BigDecimal(total);
                 bd = bd.setScale(2, RoundingMode.HALF_UP);
-                ((TextView) dialog.findViewById(R.id.energyToday)).setText("" + bd + "kWh");
-                double total = Recyclable.values()[i].alltime * Recyclable.values()[i].nrg;
-                bd = new BigDecimal(total);
-                bd = bd.setScale(2, RoundingMode.HALF_UP);
-                ((TextView) dialog.findViewById(R.id.energyTotal)).setText("" + bd + "kWh");
+                ((TextView) dialog.findViewById(R.id.intro2)).setText("" + bd + " kWh!");
                 ((TextView) dialog.findViewById(R.id.facts)).setText("" + Recyclable.values()[i].getFacts());
                 dialog.show();
             }
