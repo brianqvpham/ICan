@@ -1,7 +1,9 @@
 package com.ican.ican;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -70,44 +72,45 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Dialog dialog = new Dialog(MainActivity.this);
-                dialog.setTitle("New Recyclable");
-                dialog.setContentView(R.layout.maindialog);
-                dialog.setCancelable(true);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("New Recyclable");
+                builder.setView(R.layout.maindialog);
+                builder.setCancelable(true);
+                AlertDialog dialog;
+
+                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int index = ((Spinner) ((AlertDialog) dialog).findViewById(R.id.category)).getSelectedItemPosition();
+                        Recyclable recyclable = Recyclable.values()[index];
+                        int numItems = 0;
+                        try {
+                            numItems = Integer.parseInt(((EditText) ((AlertDialog) dialog).findViewById(R.id.numItems)).getText().toString());
+                        } catch (NumberFormatException ignored) {
+                        }
+                        recyclable.daily += numItems;
+                        recyclable.alltime += numItems;
+                        ((TextView) ((RecyclerView) findViewById(R.id.stats)).getChildAt(index).findViewById(R.id.count)).setText("" + (MainActivity.dataRange ? Recyclable.values()[index].alltime : Recyclable.values()[index].daily));
+
+                        save();
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                dialog = builder.create();
+                dialog.create();
 
                 Spinner spinner = (Spinner) dialog.findViewById(R.id.category);
                 // Create an ArrayAdapter using the string array and a default spinner layout
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.this,
                         R.array.Recyclables, android.R.layout.simple_spinner_item);
                 spinner.setAdapter(adapter);
-
-                View confirm = dialog.findViewById(R.id.confirm);
-                confirm.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        int index = ((Spinner) dialog.findViewById(R.id.category)).getSelectedItemPosition();
-                        Recyclable recyclable = Recyclable.values()[index];
-                        int numItems = 0;
-                        try {
-                            numItems = Integer.parseInt(((EditText) dialog.findViewById(R.id.numItems)).getText().toString());
-                        } catch (NumberFormatException ignored) {
-                        }
-                        recyclable.daily += numItems;
-                        recyclable.alltime += numItems;
-                        ((TextView) ((RecyclerView) findViewById(R.id.stats)).getChildAt(index).findViewById(R.id.count)).setText("" + (MainActivity.dataRange ? Recyclable.values()[index].alltime : Recyclable.values()[index].daily));
-                        dialog.cancel();
-
-                        save();
-                    }
-                });
-
-                View cancel = dialog.findViewById(R.id.cancel);
-                cancel.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.cancel();
-                    }
-                });
 
                 dialog.show();
             }
